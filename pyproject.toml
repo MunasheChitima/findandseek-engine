@@ -5,12 +5,16 @@ description = "Local-first file intelligence engine with an MCP interface"
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [{ name = "Munashe Chitima" }]
-# FSL is source-available, not OSI-approved, so it has no SPDX short identifier.
-# PEP 639 covers that case with a LicenseRef- expression; the authoritative terms
-# are LICENSE.md, which ships in the wheel and sdist via license-files below.
-license = "LicenseRef-FSL-1.1-ALv2"
+# BUSL-1.1 is a recognised SPDX identifier, but it is source-available, not an
+# OSI-approved open-source license: internal use is free, while hosting it for
+# others or running it commercially for third parties needs a separate license,
+# until each version converts to Apache-2.0 on its Change Date. The authoritative
+# terms are LICENSE.md, which ships in the wheel and sdist via license-files below.
+license = "BUSL-1.1"
 license-files = ["LICENSE.md"]
 keywords = ["mcp", "search", "local-first", "rag", "file-intelligence"]
+# NB: "License :: " trove classifiers are intentionally omitted; PyPI has no
+# classifier for BUSL, and the SPDX `license` field above is authoritative.
 classifiers = [
   "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",

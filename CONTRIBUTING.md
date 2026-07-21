@@ -4,10 +4,10 @@ Thanks for your interest. A few ground rules to know before opening a PR:
 
 ## Contributor License Agreement
 
-FindandSeek is licensed under FSL-1.1-ALv2, which requires the project to
-retain a single copyright holder. Before your first PR can be merged you'll be
-asked to agree to a CLA assigning copyright in your contribution to the
-licensor. This is currently a manual step — expect to be asked in a PR comment,
+FindandSeek is licensed under BUSL-1.1. The project keeps a single copyright
+holder so it can offer the commercial license and make the future Apache-2.0
+release. Before your first PR can be merged you'll be asked to agree to a CLA
+assigning copyright in your contribution to the licensor. This is currently a manual step — expect to be asked in a PR comment,
 not by a bot. If that's not acceptable to you, that's completely fair — please
 open an issue describing the change instead, and we may implement it
 independently.

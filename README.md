@@ -1,7 +1,7 @@
 # FindandSeek Engine
 
 [![tests](https://github.com/MunasheChitima/findandseek-engine/actions/workflows/test.yml/badge.svg)](https://github.com/MunasheChitima/findandseek-engine/actions/workflows/test.yml)
-[![license: FSL-1.1-ALv2](https://img.shields.io/badge/license-FSL--1.1--ALv2-blue)](LICENSE.md)
+[![license: BUSL-1.1](https://img.shields.io/badge/license-BUSL--1.1-blue)](LICENSE.md)
 [![python: 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](pyproject.toml)
 
 A local-first file intelligence engine. It indexes the documents, code, and
@@ -234,40 +234,35 @@ product is where the enterprise machinery lives.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). In short: tests run on every PR, new
 behaviour needs a test, and first-time contributors are asked to sign a CLA
-(FSL requires a single copyright holder).
+(the project keeps a single copyright holder so it can offer the commercial
+license and the future Apache-2.0 release).
 
 ## License
 
-[Functional Source License 1.1, Apache 2.0 future license](LICENSE.md)
-(FSL-1.1-ALv2): you can read, run, modify, and redistribute it for any
-purpose except building a competing product; each release becomes Apache 2.0
-two years after publication.
+[Business Source License 1.1](LICENSE.md) (BUSL-1.1). This is a
+source-available license, not an open-source one: you can read, run, and modify
+the engine freely, including inside a company for your own use, but you can't
+sell it to others or run it as a service for them. Each release converts to
+Apache 2.0 on the second anniversary of its publication.
 
-"FindandSeek" is a trademark of the licensor. The license above covers the
-code, not the name.
+"FindandSeek" is a trademark of the licensor. The license covers the code, not
+the name.
 
-**What that means in practice** (plain-language summary — not legal advice, the
+**What that means in practice** (plain-language summary, not legal advice, the
 [license text](LICENSE.md) governs):
 
-- **Internal use is always fine.** Running the engine inside your own company,
-  for your own operations, is an explicitly Permitted Purpose — no matter how
-  commercial your company is.
-- **Reselling it as competing functionality is not.** If you build a product on
-  the engine and sell or otherwise make it available to others, that product may
-  not substitute for FindandSeek or offer the same or substantially similar
-  functionality — that's a "Competing Use". Embedding it in a product with a
-  genuinely different purpose is a case-by-case question; when in doubt, ask.
-- **Building an AI-agent product on the engine and deploying it to clients?**
-  Hosting the engine and serving its functionality to your clients as a
-  commercial product or service is a Competing Use — not covered by this
-  license. We offer a **commercial license for exactly that**, alongside a
-  purpose-built agent-deployment layer: **role-based access control that scopes
-  every agent to the permissions of the user it acts for**, so an agent only
-  ever reaches files that user could already see themselves. Licensing and
-  details at [findandseek.app](https://findandseek.app). (Setting the engine up
-  for a client who runs it themselves, as professional services, is fine.)
-- **It all opens up eventually.** Every release becomes Apache 2.0 two years
-  after it ships, at which point these restrictions fall away for that version.
+- **Free to run inside your own team or company.** Using the engine for your
+  own operations, on your own machines, is free, and it stays free no matter how
+  commercial your company is. Personal use, learning, and research are free too.
+- **You can't sell it to others or run it for them.** You may not host it as a
+  service for third parties, and you may not be paid to deploy, operate, or
+  provide it to someone else's business. Turning the engine into a product or a
+  managed service for others needs a commercial license. Licensing at
+  [findandseek.app](https://findandseek.app), and it comes with a purpose-built
+  agent-deployment layer: role-based access control that scopes every agent to
+  the permissions of the user it acts for.
+- **It opens up eventually.** Every release becomes Apache 2.0 two years after
+  it ships, at which point these restrictions fall away for that version.
 
 ## Acknowledgements
 
