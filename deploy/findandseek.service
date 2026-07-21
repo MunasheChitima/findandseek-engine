@@ -1,0 +1,32 @@
+# systemd user service for FindandSeek background ingest (Linux).
+#
+# Install:
+#   mkdir -p ~/.config/systemd/user
+#   cp deploy/findandseek.service ~/.config/systemd/user/
+#   # edit WorkingDirectory + ExecStart path below to match your checkout
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now findandseek
+#   loginctl enable-linger "$USER"     # keep it running when you're logged out
+#
+# Watch logs:  journalctl --user -u findandseek -f
+# Stop:        systemctl --user stop findandseek
+
+[Unit]
+Description=FindandSeek background ingest (worker + watcher + API)
+# Requires a local Ollama daemon for inference/embeddings off-Mac:
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# --- edit these two lines for your machine ---
+WorkingDirectory=%h/findandseek-engine
+ExecStart=/usr/bin/env uv run findandseek-up
+# ---------------------------------------------
+Restart=on-failure
+RestartSec=5
+# Bound the Ollama-backed models' memory if you like (optional):
+# Environment=FINDANDSEEK_OLLAMA_CHAT_MODEL=qwen3:4b
+
+[Install]
+WantedBy=default.target

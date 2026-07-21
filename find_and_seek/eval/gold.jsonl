@@ -1,0 +1,20 @@
+{"id": "plumber-invoice", "intent": "known_item", "query": "invoice from the plumber for the March job", "expect": ["invoice_plumber_march"], "expect_type": "invoice"}
+{"id": "plumbing-bill-semantic", "intent": "semantic", "query": "what did we pay for the drainage repair work", "expect": ["invoice_plumber_march"]}
+{"id": "council-letter", "intent": "known_item", "query": "letter to the council", "expect": ["letter_to_council"], "expect_type": "letter"}
+{"id": "council-planning-semantic", "intent": "semantic", "query": "correspondence with local government about a planning matter", "expect": ["letter_to_council"]}
+{"id": "board-deck", "intent": "known_item", "query": "board deck presentation", "expect": ["board_deck"]}
+{"id": "quarterly-review-semantic", "intent": "semantic", "query": "slides for the quarterly review meeting", "expect": ["board_deck"]}
+{"id": "cashflow-model", "intent": "known_item", "query": "cashflow spreadsheet", "expect": ["cashflow"]}
+{"id": "runway-semantic", "intent": "semantic", "query": "how much money is coming in and going out each month", "expect": ["cashflow"]}
+{"id": "long-contract", "intent": "known_item", "query": "the long contract PDF", "expect": ["contract_long"], "expect_type": "contract"}
+{"id": "agreement-terms-semantic", "intent": "semantic", "query": "terms and conditions of the signed agreement", "expect": ["contract_long"]}
+{"id": "scanned-letter", "intent": "known_item", "query": "scanned letter", "expect": ["scanned_letter"]}
+{"id": "ocr-scan-semantic", "intent": "semantic", "query": "a letter that was photographed rather than typed", "expect": ["scanned_letter"]}
+{"id": "email-thread", "intent": "known_item", "query": "email thread", "expect": ["email_thread"]}
+{"id": "contacts-list", "intent": "known_item", "query": "contacts spreadsheet", "expect": ["contacts"]}
+{"id": "phone-numbers-semantic", "intent": "semantic", "query": "where is the list of everyone's phone numbers", "expect": ["contacts"]}
+{"id": "meeting-notes", "intent": "known_item", "query": "my notes", "expect": ["notes"]}
+{"id": "photo-sign", "intent": "known_item", "query": "photo with a sign in it", "expect": ["photo_with_sign"]}
+{"id": "structured-data", "intent": "known_item", "query": "the JSON data file", "expect": ["data"]}
+{"id": "duplicates-cluster", "intent": "cluster", "query": "documents that appear more than once in the index", "expect": ["duplicate_of_1"]}
+{"id": "financial-docs-cluster", "intent": "cluster", "query": "anything to do with money — invoices, budgets, cashflow", "expect": ["invoice_plumber_march", "cashflow"]}

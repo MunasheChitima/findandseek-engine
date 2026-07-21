@@ -1,0 +1,81 @@
+[project]
+name = "find-and-seek"
+version = "0.2.1"
+description = "Local-first file intelligence engine with an MCP interface"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Munashe Chitima" }]
+# FSL is source-available, not OSI-approved, so it has no SPDX short identifier.
+# PEP 639 covers that case with a LicenseRef- expression; the authoritative terms
+# are LICENSE.md, which ships in the wheel and sdist via license-files below.
+license = "LicenseRef-FSL-1.1-ALv2"
+license-files = ["LICENSE.md"]
+keywords = ["mcp", "search", "local-first", "rag", "file-intelligence"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Operating System :: MacOS :: MacOS X",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Text Processing :: Indexing",
+]
+dependencies = [
+  "pymupdf>=1.24",
+  "python-docx>=1.1",
+  "python-pptx>=0.6.23",
+  "openpyxl>=3.1",
+  "striprtf>=0.0.26",
+  "mail-parser>=4.0",
+  "extract-msg>=0.48",
+  "chardet>=5.2",
+  "spacy>=3.7",
+  "onnxruntime>=1.18",
+  "numpy>=1.26",
+  "sqlite-vec>=0.1.6",
+  "fastapi>=0.111",
+  "uvicorn[standard]>=0.30",
+  "pydantic>=2.7",
+  "watchdog>=4.0",
+  "mcp>=1.0",
+  "psutil>=5.9",
+  "httpx>=0.27",
+  "Pillow>=10.0",
+  "tiktoken>=0.7",
+  "tokenizers>=0.15",
+  # Default inference stack — in-process Apple-Silicon, no external daemon.
+  "mlx>=0.18; sys_platform == 'darwin'",
+  "mlx-lm>=0.20; sys_platform == 'darwin'",
+  "mlx-vlm>=0.1; sys_platform == 'darwin'",
+  "mlx-embeddings>=0.0.1; sys_platform == 'darwin'",
+  "huggingface-hub>=0.24",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-asyncio>=0.23",
+  "httpx>=0.27",
+]
+[project.scripts]
+findandseek-api = "find_and_seek.api.server:main"
+findandseek-engine-mcp = "find_and_seek.mcp.server:main"
+findandseek-worker = "find_and_seek.ingest.worker:main"
+findandseek-watch = "find_and_seek.watch.watcher:main"
+findandseek-service = "find_and_seek.service.launchd:main"
+findandseek-up = "find_and_seek.service.supervisor:main"
+findandseek-setup = "find_and_seek.setup_weights:main"
+findandseek-sidecar = "find_and_seek.sidecar:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["find_and_seek*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

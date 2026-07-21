@@ -1,0 +1,86 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Floor and current. The floor is what pyproject promises
+        # (requires-python = ">=3.11"); breaking it should fail here, not for a
+        # user running the system Python on an LTS distro.
+        python-version: ["3.11", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: uv sync --python ${{ matrix.python-version }}
+
+      - name: Run tests
+        # The suite is hermetic — pseudo-embeddings, no model weights, no
+        # network — so it needs nothing beyond the Python deps. See
+        # tests/conftest.py for why PERFORMANCE_MODE is pinned.
+        env:
+          FINDANDSEEK_TEST: "1"
+          FINDANDSEEK_PERFORMANCE_MODE: full
+        run: uv run pytest tests -q
+
+  import-check:
+    # Catches the failure mode the unit tests can't: a module that only gets
+    # imported in a long-lived process (worker, watcher, supervisor child)
+    # and whose import-time error would otherwise surface as a restart loop
+    # in production rather than a red build here.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - run: uv sync
+      - name: Byte-compile the package
+        run: uv run python -m compileall -q find_and_seek
+      - name: Import every console-script entry point
+        env:
+          FINDANDSEEK_TEST: "1"
+        run: |
+          uv run python - <<'PY'
+          import importlib
+
+          # Keep in sync with [project.scripts] in pyproject.toml.
+          MODULES = [
+              "find_and_seek.api.server",
+              "find_and_seek.ingest.worker",
+              "find_and_seek.watch.watcher",
+              "find_and_seek.mcp.server",
+              "find_and_seek.service.supervisor",
+              # macOS-only at runtime, but must stay import-clean on Linux —
+              # it is a declared entry point, so a bad import is a broken
+              # install everywhere, not just on the platform that runs it.
+              "find_and_seek.service.launchd",
+              "find_and_seek.setup_weights",
+              "find_and_seek.sidecar",
+          ]
+          for name in MODULES:
+              mod = importlib.import_module(name)
+              assert callable(getattr(mod, "main", None)), f"{name}: no main()"
+              print(f"ok  {name}")
+          PY
